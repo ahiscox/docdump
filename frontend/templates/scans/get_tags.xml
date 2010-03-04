@@ -1,0 +1,105 @@
+<taconite>
+  <replaceContent select="#ocr-{{ id }}">
+    <![CDATA[
+      {% if tags %}
+        <div class="tags">
+          {% for tag in tags %}
+            <div class="tag">
+              {{ tag.name }}
+            </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        No tags..
+      {% endif %}
+
+      <div class="formNewTag">
+        <form action="/scan/comments/1/" onsubmit="">
+
+          <select class="tags">
+            <option value="ExistingTag">Existing Tag</option>
+            {% for tag in alltags %}
+              <option value="{{ tag.name }}">{{ tag.name }}</option>
+            {% endfor %}
+          </select>
+          <input id="tag-{{ id }}" type="text" value="" autocomplete="off"/>
+          Select from list, or enter tag and hit enter.
+          <input type="button" class="addTag" value="add" />
+
+        </form>
+      </div>
+
+    ]]>
+  </replaceContent>
+  <eval><![CDATA[
+
+    tags = [
+      {% for tag in alltags %}
+        "{{ tag.name }}",
+      {% endfor %}
+    ];
+
+    function getid(that) {
+      // Returns the scanid of an element.
+      return $(that).parents('.result').attr('id');
+    }
+
+    function newtag(tagname, scanid) {
+      // Add a new tag to the database, attach to document,
+      // update the tags for scanid.
+      // alert('newtag function tag: ' + tagname + ' scanid: ' + scanid);
+      win = $('.result#' + scanid).find('.ocr');
+      win.html('updating..');
+
+      //TODO: Add some validation in here..
+      $.get('/scan/addtag/' + scanid + '/' + tagname);
+
+      // Populate all select lists
+
+      $('select.tags').add(tagname);
+
+      // Finally, refresh tags.
+      $('.result#' + scanid).find('a.t_tags').click();
+    }
+
+    /****
+     * Setup autocomplete...
+     ***/
+    io = $('input#tag-{{ id }}')
+    io.autocompleteArray(tags,
+                        {
+                          autoFill:true,
+                          onItemSelect:function(tag){
+                            newtag(tag.firstChild.nodeValue, {{ id }});
+                          }
+                        });
+
+    // Capture if form is submitted with <CR>
+    $('div.formNewTag').submit(function(e){
+      e.preventDefault();
+
+      scanid = getid($(this));
+      tag = $(this).find('.ac_input').attr('value');
+      newtag(tag, scanid);
+    });
+
+    // Capture if form submitted with button.
+    $('input.addTag').click(function(e){
+      // Add a tag to the database and return taconite updated tags list.
+      e.preventDefault();
+
+      scanid = getid($(this));
+      tag = $(this).prev().attr('value');
+      newtag(tag, scanid);
+    });
+
+    // Capture if form submitted with list selection:
+    $('select.tags').change(function(e){
+      scanid = getid($(this));
+      // tag = $(this).next().attr('value');
+      tag = $(this).val();
+      newtag(tag, scanid);
+    });
+  ]]>
+  </eval>
+</taconite>

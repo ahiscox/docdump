@@ -1,0 +1,15 @@
+<taconite>
+  <replaceContent select="#ocr-{{ id }}">
+    <![CDATA[
+      {% if scan %}
+        <h4>Excerpt...</h4>
+        <blockquote class="quite_background">
+          {{ scan.before_break|linebreaksbr }}
+          <br /><span class="quote_end">.....</span>
+        </blockquote>
+      {% else %}
+        Error fetching excerpt!
+      {% endif %}
+    ]]>
+  </replaceContent>
+</taconite>

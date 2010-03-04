@@ -1,0 +1,26 @@
+<div id="search_form">
+    <form action='./' method='GET'>
+
+        {{form.as_p}}
+        <p><input type="submit" value="Search!"/></p>
+    </form>
+
+</div>
+<div id="results">
+{% if correct %}
+    <i> Did you mean... {{ correct }}</i>
+    {% if noresults %}
+        <h4>No results found, showing results for "{{ correct }}"</h4>
+    {% endif %}
+
+{% endif %}
+
+{% if results %}
+    <h2>Search Results</h2>
+    <ol>
+        {% for hit in results %}
+        <li>{{ hit.instance }}- {{ hit.percent }}% match</li>
+        {% endfor %}
+    </ol>
+{% endif %}
+</div>

@@ -1,0 +1,74 @@
+--------------------------------------------------------------------------------
+Sat Feb 13 05:47:47 2010	70509	<class 'frontend.scans.models.DoesNotExist'>	ScanStatus matching query does not exist.
+
+Traceback (most recent call last):
+  File "./scan.py", line 313, in <module>
+    main()
+  File "./scan.py", line 299, in main
+    s = GrabScan()
+  File "./scan.py", line 98, in __init__
+    self.status = ScanStatus.objects.get(pk=1)
+  File "/usr/lib/pymodules/python2.6/django/db/models/manager.py", line 120, in get
+    return self.get_query_set().get(*args, **kwargs)
+  File "/usr/lib/pymodules/python2.6/django/db/models/query.py", line 305, in get
+    % self.model._meta.object_name)
+DoesNotExist: ScanStatus matching query does not exist.
+
+docdump: 0.5
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+Sat Feb 13 06:00:31 2010	49399	<type 'exceptions.OSError'>	[Errno 2] No such file or directory
+
+Traceback (most recent call last):
+  File "./scan.py", line 313, in <module>
+    main()
+  File "./scan.py", line 300, in main
+    s.all()
+  File "./scan.py", line 113, in all
+    self.db_insert()
+  File "./scan.py", line 227, in db_insert
+    ocr_text = self._fetch_ocr(im)
+  File "./scan.py", line 260, in _fetch_ocr
+    bitonal = m.threshold(image)
+  File "/home/fnadmin/dd/mkbitmap/mkbitmap.py", line 62, in threshold
+    return self.__run_mkbitmap(image, mkb_filter)
+  File "/home/fnadmin/dd/mkbitmap/mkbitmap.py", line 105, in __run_mkbitmap
+    subprocess.check_call(cmd)
+  File "/usr/lib/python2.6/subprocess.py", line 483, in check_call
+    retcode = call(*popenargs, **kwargs)
+  File "/usr/lib/python2.6/subprocess.py", line 470, in call
+    return Popen(*popenargs, **kwargs).wait()
+  File "/usr/lib/python2.6/subprocess.py", line 621, in __init__
+    errread, errwrite)
+  File "/usr/lib/python2.6/subprocess.py", line 1126, in _execute_child
+    raise child_exception
+OSError: [Errno 2] No such file or directory
+
+docdump: 0.5
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+Sat Feb 13 06:07:05 2010	74000	<type 'exceptions.OSError'>	[Errno 2] No such file or directory
+
+Traceback (most recent call last):
+  File "./scan.py", line 313, in <module>
+    main()
+  File "./scan.py", line 300, in main
+    s.all()
+  File "./scan.py", line 113, in all
+    self.db_insert()
+  File "./scan.py", line 227, in db_insert
+    ocr_text = self._fetch_ocr(im)
+  File "./scan.py", line 263, in _fetch_ocr
+    tmp = pytesser.pytesser.image_to_string(bitonal)
+  File "/home/fnadmin/dd/pytesser/pytesser.py", line 31, in image_to_string
+    call_tesseract(scratch_image_name, scratch_text_name_root)
+  File "/home/fnadmin/dd/pytesser/pytesser.py", line 21, in call_tesseract
+    proc = subprocess.Popen(args)
+  File "/usr/lib/python2.6/subprocess.py", line 621, in __init__
+    errread, errwrite)
+  File "/usr/lib/python2.6/subprocess.py", line 1126, in _execute_child
+    raise child_exception
+OSError: [Errno 2] No such file or directory
+
+docdump: 0.5
+--------------------------------------------------------------------------------

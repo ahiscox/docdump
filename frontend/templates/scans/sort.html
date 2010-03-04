@@ -1,0 +1,67 @@
+        {% extends "base.html" %}
+
+        {% block title %} Sort Scans {% endblock %}
+
+        {% block content %}
+
+        <div id="flash">
+            {% if not unprocessed %}
+                No unprocessed scans were found! If you have recently scanned 
+                some items,  and were expecting to sort them now then something 
+                has went wrong and the scan was not complete. If the scan failed
+                with an error your admin has already been notified and is 
+                working hard to resolve the issue, if repeated attempts to scan 
+                fail, please contact your admin as soon as possible.
+            {% endif %}
+        </div>
+
+        <div class="results">
+            <div id="dialog">
+            </div><!-- /dialog -->
+
+            <div id="help" style="display: none">
+                <div id="help_menu">
+                    <a href="index" id="dochome">Home</a>
+                </div>
+                <div id="help_content">
+                </div><!-- /help_content --> 
+            </div>
+            
+            <div id="alltags" style="display:none;">
+            </div>
+
+            {% for scan in unprocessed %}
+            <div class="result" id="{{ scan.id }}">
+                <div class="image">
+                    <a href="{{ scan.preview_link }}" class="preview">
+                        <img src="{{ scan.thumb_link }}" class="thumbnail"/>
+                    </a>
+                </div>
+
+            <div class="ocr_and_menu">
+                <a class="help" href="/help">
+                    <img src="/static/img/question.png" alt="" title="" />
+                </a>
+                <div class="ocr" id="ocr-{{ scan.id }}">
+                    <h4>Excerpt...</h4>
+                        <blockquote class="quote_background">
+                            {{ scan.before_break|linebreaksbr }}
+                            <br /><span class="quote_end">.....</span>
+                        </blockquote><!-- /blockquote --> 
+                </div><!-- /ocr-scanid -->
+
+                <div class="menu">
+                    <ul class="menu">
+
+                        <li><a href="{{ scan.pdf_link }}">pdf</a></li>
+                        <li><a href="#" class="t_excerpt">excerpt</a></li>
+                        <li><a href="#" class="t_comments">comments</a></li>
+                        <li><a href="#" class="t_tags">tags</a></li>
+                    </ul>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+
+        {% endblock %}

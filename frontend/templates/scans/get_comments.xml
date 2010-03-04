@@ -1,0 +1,23 @@
+<taconite>
+  <replaceContent select="#ocr-{{ id }}">
+    <![CDATA[
+      {% if comments %}
+        <div class="comments">
+          {% for comment in comments %}
+            <div class="comment">
+              <div class="comment_header">
+                <div class="comment_name">{{ comment.name }}</div>
+                <div class="comment_date">{{ comment.pub_date }}</div>
+              </div>
+              <div class="comment_body">
+                {{ comment.content }}
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        No comments!
+      {% endif %}
+    ]]>
+  </replaceContent>
+</taconite>

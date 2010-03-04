@@ -1,0 +1,35 @@
+#progress {
+    width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 5px;
+}
+#percent { 
+    text-size: 1em; 
+    text-align: center;
+    font-family: sans-serif;
+    color: white;
+    margin-bottom: 15px;
+}
+#status {
+    text-align: center;
+    font-size: 1em; 
+    font-family: sans-serif; 
+    color: white;
+    padding: 5px;
+}
+#buttons {
+    margin-top: 25px;
+    text-align: center;
+    font-size: 1.5em;
+    font-family: sans-serif;
+}
+
+#buttons a { 
+    color: white;
+}
+
+#buttons a:hover { 
+    color: gray; 
+}
+

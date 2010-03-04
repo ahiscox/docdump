@@ -1,0 +1,25 @@
+{% comment %}
+
+    This template serves up the form for managing tags associated with a scan.
+    It requires 'tags' which is a list of all tags associated with this scan. 
+
+{% endcomment %}
+
+<div class="tags">
+    <div class="tag_editor">
+        <select multiple="multiple" class="alltags"></select>
+    </div>
+
+    <div class="attached_tags">
+        {% for tag in tags %}
+        <span class="tag">{{ tag }}</span>
+        {% endfor %}
+    </div>
+    
+    <div class="tag_input">
+        <form action="#">
+            <input type="text" />
+        </form>
+    </div>
+    <div class="tag_flash"></div>
+</div>
