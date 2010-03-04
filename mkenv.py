@@ -16,8 +16,8 @@ def after_install(options, home_dir):
     subprocess.call([easy_install, '-U', 'supervisor']) 
     subprocess.call([easy_install, '-U', 'django'])
     subprocess.call([easy_install, '-U', 'cherrypy'])
+    subprocess.call([easy_install, '-U', 'mysql-python'])
     subprocess.call(['git', 'clone', 'git@github.com:ahiscox/docdump.git', join(home_dir, 'docdump')])
-    subprocess.call(['read']) 
 """))
 f = open('setup_docdump.py', 'w').write(output)
 
